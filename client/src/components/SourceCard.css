@@ -1,0 +1,30 @@
+.source-pill {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--surface-2);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+  font-size: 0.85rem;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: var(--shadow-sm);
+}
+
+.source-pill:hover {
+  background-color: var(--surface-1);
+  border-color: #d4d4d8;
+  color: var(--text-main);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.source-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

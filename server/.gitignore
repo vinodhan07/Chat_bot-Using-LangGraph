@@ -1,0 +1,14 @@
+# Environment
+.env
+.venv
+venv
+env/
+__pycache__/
+*.pyc
+
+# Notebook Checkpoints
+.ipynb_checkpoints
+
+# Logs
+log/
+*.log
