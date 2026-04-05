@@ -18,8 +18,8 @@
   --sidebar-text-muted: #a1a1aa;
   
   /* Accents */
-  --accent-color: #39FF14;
-  --accent-hover: #32e612;
+  --accent-color: #FFE135;
+  --accent-hover: #F2D522;
   --accent-dark: #121212;
   
   --border-color: #e4e4e7;
@@ -34,7 +34,7 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-glow: 0 0 16px rgba(57, 255, 20, 0.2);
+  --shadow-glow: 0 0 16px rgba(255, 225, 53, 0.2);
 }
 
 * {

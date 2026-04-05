@@ -1,14 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
-import { Search, Loader2, ArrowRight, Paperclip, Mic, Scale, Globe, Cpu, MoreHorizontal, Upload } from 'lucide-react';
+import { Search, Loader2, ArrowUp, Paperclip, Mic, Scale, Globe, MoreHorizontal, Upload, Send, Cpu } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import SourceCard from './components/SourceCard';
 import ProfileModal from './components/ProfileModal';
 import SettingsModal from './components/SettingsModal';
+import LandingPage from './components/LandingPage';
+import LoginPage from './components/LoginPage';
 import './App.css';
 
 function App() {
+  const [view, setView] = useState('landing');
   const [query, setQuery] = useState('');
   const [chatStarted, setChatStarted] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -19,9 +22,9 @@ function App() {
   const [userProfile, setUserProfile] = useState(() => {
     const saved = localStorage.getItem('userProfile');
     return saved ? JSON.parse(saved) : {
-      firstName: 'Vinodhan',
-      lastName: 'V A',
-      email: 'vinodhan07@example.com',
+      firstName: 'Think',
+      lastName: 'Chain',
+      email: 'hello@thinkchain.ai',
       theme: 'light'
     };
   });
@@ -37,6 +40,15 @@ function App() {
       bottomRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages, isTyping]);
+
+  const handleGetStarted = () => setView('login');
+  const handleLogin = () => setView('chat');
+  const handleBackToLanding = () => setView('landing');
+  const handleNewChat = () => {
+    setChatStarted(false);
+    setMessages([]);
+    setQuery('');
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,7 +71,7 @@ function App() {
       role: 'assistant',
       content: '',
       sources: [],
-      query: currentQuery // Store query for the timeline phase 1
+      query: currentQuery 
     }]);
     
     setIsTyping(true);
@@ -127,6 +139,9 @@ function App() {
     }
   };
 
+  if (view === 'landing') return <LandingPage onGetStarted={handleGetStarted} />;
+  if (view === 'login') return <LoginPage onLogin={handleLogin} onBack={handleBackToLanding} />;
+
   return (
     <div className={`app-viewer ${isSidebarHovered ? 'sidebar-open' : ''}`}>
       <div 
@@ -138,13 +153,17 @@ function App() {
         onMouseEnter={() => setIsSidebarHovered(true)}
         onMouseLeave={() => setIsSidebarHovered(false)}
       >
-        <Sidebar user={userProfile} onProfileClick={() => setIsProfileOpen(true)} />
+        <Sidebar 
+          user={userProfile} 
+          onProfileClick={() => setIsProfileOpen(true)} 
+          onNewChat={handleNewChat}
+        />
       </div>
       
       <main className="main-content">
         <div className="chat-header">
            <div className="header-brand">
-             <span className="brand-name">Vindh AI</span>
+             <span className="brand-name">ThinkChain AI</span>
              <span className="brand-version">v2.0</span>
            </div>
            <div className="header-actions">
@@ -155,28 +174,28 @@ function App() {
 
         {!chatStarted ? (
           <div className="welcome-screen fade-in">
-            <h1>Hello, Guest</h1>
+            <h1>Hello, {userProfile.firstName}</h1>
             <div className="welcome-subtitle">Let's make your research easier.</div>
             
             <div className="input-container-wrapper">
               <form onSubmit={handleSubmit} className="chat-input-form">
-                <div className="input-box">
+                <div className="input-box premium-input">
                   <div className="input-icons-left">
-                     <button type="button" className="icon-btn" title="Attach file"><Paperclip size={20}/></button>
+                     <button type="button" className="icon-btn-plain" title="Attach file"><Paperclip size={18}/></button>
                   </div>
                   <textarea
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder="Ask anything..."
+                    placeholder="Ask anything"
                     disabled={isTyping}
                   />
                   <div className="input-icons-right">
-                     <button type="button" className="icon-btn" title="Voice search"><Mic size={20}/></button>
+                     <button type="button" className="icon-btn-plain" title="Voice search"><Mic size={18}/></button>
+                     <button type="submit" className="send-btn-solid" disabled={!query.trim() || isTyping}>
+                        <Send size={18} />
+                     </button>
                   </div>
-                  <button type="submit" className="submit-btn" disabled={!query.trim() || isTyping}>
-                    <ArrowRight size={20} />
-                  </button>
                 </div>
               </form>
             </div>
@@ -286,23 +305,23 @@ function App() {
             
             <div className="floating-input">
               <form onSubmit={handleSubmit} className="chat-input-form fade-in">
-                <div className="input-box">
+                <div className="input-box premium-input">
                    <div className="input-icons-left">
-                     <button type="button" className="icon-btn"><Paperclip size={20}/></button>
+                     <button type="button" className="icon-btn-plain" title="Attach file"><Paperclip size={18}/></button>
                   </div>
                   <textarea
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder="Ask a follow-up..."
+                    placeholder="Ask anything"
                     disabled={isTyping}
                   />
                   <div className="input-icons-right">
-                     <button type="button" className="icon-btn"><Mic size={20}/></button>
+                     <button type="button" className="icon-btn-plain" title="Voice search"><Mic size={18}/></button>
+                     <button type="submit" className="send-btn-solid" disabled={!query.trim() || isTyping}>
+                        <Send size={18} />
+                     </button>
                   </div>
-                  <button type="submit" className="submit-btn" disabled={!query.trim() || isTyping}>
-                    <ArrowRight size={20} />
-                  </button>
                 </div>
               </form>
             </div>

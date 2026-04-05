@@ -2,19 +2,19 @@ import React from 'react';
 import { MessageSquarePlus, Search, Users, Zap } from 'lucide-react';
 import './Sidebar.css';
 
-const Sidebar = ({ user, onProfileClick }) => {
+const Sidebar = ({ user, onProfileClick, onNewChat }) => {
   const initials = user?.firstName?.charAt(0).toUpperCase() || 'U';
 
   return (
     <div className="sidebar">
       <div className="sidebar-header">
         <div className="brand-logo">
-          <img src="/logo.png" alt="Vindh AI Logo" className="brand-icon" />
-          <span>Vindh</span>AI
+          <img src="/logo.png" alt="ThinkChain AI Logo" className="brand-icon" />
+          <span>ThinkChain</span>AI
         </div>
       </div>
 
-      <button className="new-chat-btn" onClick={() => window.location.reload()}>
+      <button className="new-chat-btn" onClick={onNewChat}>
         <div className="new-chat-content">
           <MessageSquarePlus size={18} />
           <span>New chat</span>

@@ -126,79 +126,123 @@
 .input-container-wrapper {
   position: relative;
   width: 100%;
-  max-width: 760px;
+  max-width: 850px;
   margin: 0 auto;
 }
 
 .chat-input-form {
   width: 100%;
-  position: relative;
+  max-width: 850px;
 }
 
-.input-box {
-  display: flex;
-  align-items: center;
-  background-color: var(--surface-1);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-xl);
-  padding: 0.5rem 0.5rem 0.5rem 1rem;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
+.input-box.premium-input {
+  background-color: #ffffff !important;
+  backdrop-filter: none;
+  border: 1.5px solid var(--accent-color) !important; /* Premium Yellow Border */
+  border-radius: 100px; /* Capsule shape */
+  padding: 0.5rem 0.75rem 0.5rem 1.5rem;
+  box-shadow: 0 4px 20px rgba(255, 225, 53, 0.1), 0 0 10px rgba(255, 225, 53, 0.05); /* Yellow Glow */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
 }
 
-.input-box:focus-within {
-  border-color: #d4d4d8;
-  box-shadow: var(--shadow-md);
+.input-box.premium-input:focus-within {
+  border-color: var(--accent-color);
+  box-shadow: 0 8px 30px rgba(255, 225, 53, 0.2), 0 0 15px rgba(255, 225, 53, 0.1);
 }
 
 .input-icons-left {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: var(--text-muted);
+  gap: 12px;
+  color: #64748b;
 }
 
-.icon-btn {
-  padding: 8px;
+.icon-btn-plain {
+  color: #64748b;
+  padding: 6px;
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-muted);
+  transition: all 0.2s;
 }
 
-.icon-btn:hover {
-  background-color: var(--surface-2);
+.icon-btn-plain:hover {
   color: var(--text-main);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
-.input-box textarea {
+.bot-status {
+  display: none;
+}
+
+.premium-input textarea {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  resize: none !important;
+  color: var(--text-main) !important;
+  caret-color: var(--accent-color) !important;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  height: 48px !important;
+  padding: 12px 0 !important;
   flex: 1;
-  background: transparent;
-  border: none;
-  color: var(--text-main);
-  font-size: 1rem;
-  padding: 0.75rem 1rem;
-  resize: none;
-  height: 52px;
-  outline: none;
 }
 
-.input-box textarea::placeholder {
-  color: var(--text-muted);
+.premium-input textarea::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
 }
 
-.submit-btn {
-  background-color: var(--text-main); /* Black */
-  color: var(--surface-1); /* White */
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-full);
+.input-icons-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 4px;
+}
+
+.send-btn-solid {
+  background-color: var(--accent-color);
+  color: #000000;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 8px;
   flex-shrink: 0;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(255, 225, 53, 0.2);
+}
+
+.send-btn-solid:hover:not(:disabled) {
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(255, 225, 53, 0.4);
+}
+
+.send-btn-solid:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.send-btn-solid:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background-color: #e2e8f0;
+  box-shadow: none;
+}
+
+/* Original Input Box override */
+.input-box {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
 }
 
 .submit-btn:hover:not(:disabled) {
@@ -214,9 +258,10 @@
 /* Category Cards */
 .category-cards {
   display: flex;
+  flex-direction: row; /* Horizontal for full view */
   gap: 1rem;
   margin-top: 3rem;
-  max-width: 800px;
+  max-width: 850px;
   width: 100%;
   justify-content: center;
 }
@@ -267,7 +312,7 @@
 
 /* Chat Layout & Timeline */
 .message-row {
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
   margin-bottom: 2rem;
 }

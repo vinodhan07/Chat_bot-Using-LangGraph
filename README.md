@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="client/public/logo.png" width="160" alt="Vindh AI Logo">
+  <img src="client/public/logo.png" width="160" alt="ThinkChain AI Logo">
 </p>
 
-# 🌟 Vindh AI v2.0: The Research-First AI Assistant
+# 🌟 ThinkChain AI v2.0: The Research-First AI Assistant
 
-Vindh AI is a state-of-the-art, full-stack AI Research Assistant designed to synthesize complex information through multi-step reasoning and real-time web exploration. Unlike standard chatbots, Vindh AI iterates through a specialized research loop to ensure every answer is grounded in evidence and up-to-date facts.
+ThinkChain AI is a state-of-the-art, full-stack AI Research Assistant designed to synthesize complex information through multi-step reasoning and real-time web exploration. Unlike standard chatbots, ThinkChain AI iterates through a specialized research loop to ensure every answer is grounded in evidence and up-to-date facts.
 
 ---
 
@@ -22,7 +22,7 @@ Vindh AI is a state-of-the-art, full-stack AI Research Assistant designed to syn
 
 ## 📖 Overview
 
-Vindh AI leverages **LangGraph** to orchestrate a "Search-then-Synthesize" workflow. It doesn't just guess; it researches. By browsing the web via **Tavily**, it gathers multiple perspectives, critiques the findings, and produces a final report formatted in high-fidelity Markdown.
+ThinkChain AI leverages **LangGraph** to orchestrate a "Search-then-Synthesize" workflow. It doesn't just guess; it researches. By browsing the web via **Tavily**, it gathers multiple perspectives, critiques the findings, and produces a final report formatted in high-fidelity Markdown.
 
 ---
 
@@ -51,12 +51,13 @@ graph TD
 
 ## 🚀 Key Features
 
+-   **✨ Onboarding Flow**: New Landing and Login pages for a professional, secure entry point.
 -   **🔍 Multi-Query Research**: Generates and executes multiple distinct search queries to cover all aspects of a topic.
 -   **📡 Live SSE Streaming**: Experience the AI's thought process as it unfolds, letter by letter.
 -   **⏳ Progressive Timeline**: A visual timeline in the UI that tracks exactly what the AI is doing (*Searching... Reading... Writing...*).
 -   **📚 Automatic Citations**: Every answer comes with a grid of source cards linking to the original articles.
--   **👤 User Profile Management**: Edit your identity (First/Last Name) and see the UI adapt with custom initials-based avatars.
--   **🎨 Premium UI/UX**: Inspired by Perplexity/Grok, featuring glassmorphism effects and a hidden, slide-out sidebar for a focused writing experience.
+-   **👤 User Profile Management**: Custom "Think Chain" identity with adaptive initials-based avatars.
+-   **🎨 Premium UI/UX**: Centered "Nanobanana" yellow branding with glassmorphism effects and a hidden, slide-out sidebar.
 
 ---
 
@@ -88,7 +89,7 @@ graph TD
 ```text
 ├── client/              # React Development Environment
 │   ├── src/
-│   │   ├── components/  # Modals, Sidebars, SourceCards
+│   │   ├── components/  # Modals, Landing, Login, Sidebar
 │   │   ├── App.jsx      # Main orchestration & SSE logic
 │   │   └── index.css    # Global design system & tokens
 │   └── public/          # Assets (Logo, Icons)
@@ -145,10 +146,10 @@ GOOGLE_API_KEY=AIzaSy-xxxxxxxxxxx
 ---
 
 ## 📝 License
-This project is licensed under the MIT License. Produced for educational purposes in the **Vinodhan AI Research Lab**.
+This project is licensed under the MIT License. Produced for educational purposes in the **ThinkChain AI Research Lab**.
 
 ---
 
 <p align="center">
-  <b>Built with ❤️ by Vinodhan V A</b>
+  <b>Built with ❤️ by ThinkChain AI</b>
 </p>
