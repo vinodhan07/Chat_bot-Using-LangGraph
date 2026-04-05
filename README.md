@@ -1,21 +1,20 @@
+<p align="center">
+  <img src="client/public/logo.png" width="120" alt="Vindh AI Logo">
+</p>
+
 # 🌟 Vindh AI v2.0
 
 Vindh AI is a premium, full-stack AI Research Assistant that synthesizes complex queries into deep, evidence-based answers. Built with **LangGraph** and powered by **Google Gemini**, it performs real-time web searches using **Tavily** to provide highly accurate and cited information.
 
-![Vindh AI Logo](client/public/logo.png)
-
-## 🚀 Features
-
--   **Deep Research**: Multi-step LangGraph orchestration for searching, reading, and synthesizing information.
--   **Real-time Streaming**: Instant feedback with Server-Sent Events (SSE).
--   **Progress Timeline**: Visualized AI research phases (Searching, Reading, Writing).
--   **Interactive UI**: Sleek, glassmorphism-inspired design with a dynamic slide-out sidebar.
--   **Personalized Profile**: Customizable user settings with initial-driven avatars.
--   **Mobile Responsive**: Optimized for every screen size.
-
 ---
 
 ## 🛠 Tech Stack
+
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![FastAPI](https://img.shields.io/badge/fastapi-109989?style=for-the-badge&logo=fastapi&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Google Gemini](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
 ### Backend
 -   **Framework**: FastAPI (Python)
@@ -28,6 +27,39 @@ Vindh AI is a premium, full-stack AI Research Assistant that synthesizes complex
 -   **Icons**: Lucide React
 -   **Markdown Support**: Marked, DOMPurify
 -   **Styling**: Pure CSS (Modern UI)
+
+---
+
+## 🏗 Architecture
+
+```mermaid
+graph TD
+    User([User]) -->|Query| React[React Frontend]
+    React -->|SSE Stream| FastAPI[FastAPI Backend]
+    FastAPI -->|State| LangGraph[LangGraph Engine]
+    
+    subgraph AI Orchestration
+        LangGraph -->|Analyze| Gemini[Google Gemini LLM]
+        LangGraph -->|Search| Tavily[Tavily Search API]
+        Tavily -->|Search Results| LangGraph
+        Gemini -->|Synthesis| LangGraph
+    end
+    
+    LangGraph -->|Streamed Content| FastAPI
+    FastAPI -->|Markdown Response| React
+    React -->|Interactive Answer| User
+```
+
+---
+
+## 🚀 Features
+
+-   **Deep Research**: Multi-step LangGraph orchestration for searching, reading, and synthesizing information.
+-   **Real-time Streaming**: Instant feedback with Server-Sent Events (SSE).
+-   **Progress Timeline**: Visualized AI research phases (Searching, Reading, Writing).
+-   **Interactive UI**: Sleek, glassmorphism-inspired design with a dynamic slide-out sidebar.
+-   **Personalized Profile**: Customizable user settings with initial-driven avatars.
+-   **Mobile Responsive**: Optimized for every screen size.
 
 ---
 
