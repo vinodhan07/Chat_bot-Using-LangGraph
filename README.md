@@ -1,136 +1,154 @@
 <p align="center">
-  <img src="client/public/logo.png" width="120" alt="Vindh AI Logo">
+  <img src="client/public/logo.png" width="160" alt="Vindh AI Logo">
 </p>
 
-# 🌟 Vindh AI v2.0
+# 🌟 Vindh AI v2.0: The Research-First AI Assistant
 
-Vindh AI is a premium, full-stack AI Research Assistant that synthesizes complex queries into deep, evidence-based answers. Built with **LangGraph** and powered by **Google Gemini**, it performs real-time web searches using **Tavily** to provide highly accurate and cited information.
+Vindh AI is a state-of-the-art, full-stack AI Research Assistant designed to synthesize complex information through multi-step reasoning and real-time web exploration. Unlike standard chatbots, Vindh AI iterates through a specialized research loop to ensure every answer is grounded in evidence and up-to-date facts.
 
 ---
 
-## 🛠 Tech Stack
+## 📑 Table of Contents
+- [Overview](#-overview)
+- [Architecture](#-architecture)
+- [Key Features](#-key-features)
+- [Tech Stack](#-tech-stack)
+- [Getting Started](#-getting-started)
+- [Configuration](#-configuration)
+- [Project Structure](#-project-structure)
+- [Roadmap](#-roadmap)
 
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![FastAPI](https://img.shields.io/badge/fastapi-109989?style=for-the-badge&logo=fastapi&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Google Gemini](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+---
 
-### Backend
--   **Framework**: FastAPI (Python)
--   **AI Orchestration**: LangGraph, LangChain
--   **LLM**: Google Gemini (`gemini-flash-lite-latest`)
--   **Search Engine**: Tavily API
+## 📖 Overview
 
-### Frontend
--   **Library**: React 19 (Vite)
--   **Icons**: Lucide React
--   **Markdown Support**: Marked, DOMPurify
--   **Styling**: Pure CSS (Modern UI)
+Vindh AI leverages **LangGraph** to orchestrate a "Search-then-Synthesize" workflow. It doesn't just guess; it researches. By browsing the web via **Tavily**, it gathers multiple perspectives, critiques the findings, and produces a final report formatted in high-fidelity Markdown.
 
 ---
 
 ## 🏗 Architecture
 
+The system uses a decoupled client-server architecture. The backend manages a stateful AI graph that handles long-running research tasks, while the frontend provides a real-time, streaming interface.
+
 ```mermaid
 graph TD
-    User([User]) -->|Query| React[React Frontend]
-    React -->|SSE Stream| FastAPI[FastAPI Backend]
-    FastAPI -->|State| LangGraph[LangGraph Engine]
+    User([User Query]) -->|JSON| API[FastAPI Server]
+    API -->|Initialize| LG[LangGraph Engine]
     
-    subgraph AI Orchestration
-        LangGraph -->|Analyze| Gemini[Google Gemini LLM]
-        LangGraph -->|Search| Tavily[Tavily Search API]
-        Tavily -->|Search Results| LangGraph
-        Gemini -->|Synthesis| LangGraph
+    subgraph "Core AI Loop"
+        LG -->|Analyze| Gemini[Google Gemini 1.5]
+        Gemini -->|Decision: Search| Tavily[Tavily Search API]
+        Tavily -->|Web Context| LG
+        LG -->|Decision: Synthesize| Gemini
     end
     
-    LangGraph -->|Streamed Content| FastAPI
-    FastAPI -->|Markdown Response| React
-    React -->|Interactive Answer| User
+    LG -->|Partial Content| API
+    API -->|SSE Stream| React[React Frontend]
+    React -->|Progress UI| Results[User Interface]
 ```
 
 ---
 
-## 🚀 Features
+## 🚀 Key Features
 
--   **Deep Research**: Multi-step LangGraph orchestration for searching, reading, and synthesizing information.
--   **Real-time Streaming**: Instant feedback with Server-Sent Events (SSE).
--   **Progress Timeline**: Visualized AI research phases (Searching, Reading, Writing).
--   **Interactive UI**: Sleek, glassmorphism-inspired design with a dynamic slide-out sidebar.
--   **Personalized Profile**: Customizable user settings with initial-driven avatars.
--   **Mobile Responsive**: Optimized for every screen size.
+-   **🔍 Multi-Query Research**: Generates and executes multiple distinct search queries to cover all aspects of a topic.
+-   **📡 Live SSE Streaming**: Experience the AI's thought process as it unfolds, letter by letter.
+-   **⏳ Progressive Timeline**: A visual timeline in the UI that tracks exactly what the AI is doing (*Searching... Reading... Writing...*).
+-   **📚 Automatic Citations**: Every answer comes with a grid of source cards linking to the original articles.
+-   **👤 User Profile Management**: Edit your identity (First/Last Name) and see the UI adapt with custom initials-based avatars.
+-   **🎨 Premium UI/UX**: Inspired by Perplexity/Grok, featuring glassmorphism effects and a hidden, slide-out sidebar for a focused writing experience.
+
+---
+
+## 🛠 Tech Stack
+
+<p align="center">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+  <img src="https://img.shields.io/badge/fastapi-109989?style=for-the-badge&logo=fastapi&logoColor=white" />
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/LangGraph-232F3E?style=for-the-badge&logo=langchain&logoColor=white" />
+  <img src="https://img.shields.io/badge/Google%20Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white" />
+</p>
+
+### Backend
+-   **FastAPI**: Asynchronous high-performance web framework.
+-   **LangGraph**: Cyclic graph orchestration for advanced AI workflows.
+-   **LangChain**: Tool-use and prompt management.
+-   **Tavily Search**: Optimized search engine for LLM-based agents.
+
+### Frontend
+-   **Vite + React 19**: Ultra-fast build tool and modern component architecture.
+-   **Lucide React**: Premium icon set for consistent UI language.
+-   **DOMPurify + Marked**: Secure Markdown rendering for high-fidelity responses.
 
 ---
 
 ## 📂 Project Structure
 
 ```text
-├── client/          # React Frontend (Vite)
-├── server/          # FastAPI Backend (Python)
-│   ├── app.py       # Main LangGraph server logic
-│   └── .env         # API Credentials
-├── .gitignore       # Root tracking protection
-└── README.md        # Project documentation
+├── client/              # React Development Environment
+│   ├── src/
+│   │   ├── components/  # Modals, Sidebars, SourceCards
+│   │   ├── App.jsx      # Main orchestration & SSE logic
+│   │   └── index.css    # Global design system & tokens
+│   └── public/          # Assets (Logo, Icons)
+├── server/              # FastAPI & LangGraph logic
+│   ├── app.py           # API endpoints & Response Streaming
+│   ├── system_prompt.py # Specialized AI persona & instructions
+│   └── requirements.txt # Python dependencies
+└── README.md            # You are here
 ```
 
 ---
 
 ## ⚙️ Getting Started
 
-### 1. Prerequisites
--   Python 3.10+
--   Node.js 18+
--   Tavily API Key (Get it at [tavily.com](https://tavily.com/))
--   Google Gemini API Key (Get it at [aistudio.google.com](https://aistudio.google.com/))
+### 1. Requirements
+Ensure you have **Node.js (v18+)** and **Python (3.10+)** installed.
 
 ### 2. Backend Setup
-1.  Navigate to the server directory:
-    ```bash
-    cd server
-    ```
-2.  Create and activate a virtual environment:
-    ```bash
-    python -m venv .venv
-    # Windows
-    .\.venv\Scripts\activate
-    # macOS/Linux
-    source .venv/bin/activate
-    ```
-3.  Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-4.  Create a `.env` file in the `server` folder and add:
-    ```env
-    TAVILY_API_KEY=your_tavily_key
-    GOOGLE_API_KEY=your_gemini_key
-    ```
-5.  Start the FastAPI server:
-    ```bash
-    uvicorn app:app --reload
-    ```
+```bash
+cd server
+python -m venv .venv
+.\.venv\Scripts\activate   # Windows
+pip install -r requirements.txt
+uvicorn app:app --reload
+```
 
 ### 3. Frontend Setup
-1.  Navigate to the client directory:
-    ```bash
-    cd client
-    ```
-2.  Install dependencies:
-    ```bash
-    npm install
-    ```
-3.  Launch the development server:
-    ```bash
-    npm run dev
-    ```
-4.  Open [http://localhost:5173](http://localhost:5173) in your browser.
+```bash
+cd client
+npm install
+npm run dev
+```
+
+---
+
+## 🔐 Configuration
+
+Create a `.env` file in the `/server` directory:
+
+```env
+TAVILY_API_KEY=tvly-xxxxxxxxxxxx
+GOOGLE_API_KEY=AIzaSy-xxxxxxxxxxx
+```
+
+---
+
+## 🛣 Roadmap
+
+- [ ] **Thread Persistence**: Save and resume research sessions.
+- [ ] **File Uploads**: Research across your own PDFs and documents.
+- [ ] **Dark Mode**: Native implementation for the profile-selected theme.
+- [ ] **Export to PDF**: Generate research reports for offline use.
 
 ---
 
 ## 📝 License
-This project is created for educational and research purposes.
+This project is licensed under the MIT License. Produced for educational purposes in the **Vinodhan AI Research Lab**.
 
 ---
 
-Created with ❤️ by **Vinodhan AI Research Lab**.
+<p align="center">
+  <b>Built with ❤️ by Vinodhan V A</b>
+</p>
