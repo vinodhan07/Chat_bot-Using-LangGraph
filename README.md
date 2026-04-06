@@ -1,8 +1,5 @@
-<p align="center">
-  <img src="client/public/logo.png" width="160" alt="Vindh AI Logo">
-</p>
 
-# 🌟 Vindh AI v2.0: The Research-First AI Assistant
+# 🌟 ThinkChain AI v2.0: The Research-First AI Assistant
 
 Vindh AI is a state-of-the-art, full-stack AI Research Assistant designed to synthesize complex information through multi-step reasoning and real-time web exploration. Unlike standard chatbots, Vindh AI iterates through a specialized research loop to ensure every answer is grounded in evidence and up-to-date facts.
 
