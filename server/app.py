@@ -1,6 +1,6 @@
 from typing import TypedDict, Annotated, Optional
 from langgraph.graph import add_messages, StateGraph, END
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage, AIMessageChunk, ToolMessage
 from dotenv import load_dotenv
 from langchain_tavily import TavilySearch
@@ -24,7 +24,7 @@ search_tool = TavilySearch(
 
 tools = [search_tool]
 
-llm = ChatGoogleGenerativeAI(model="gemini-flash-lite-latest")
+llm = ChatGroq(model="llama-3.3-70b-versatile")
 
 SYSTEM_PROMPT = """You are a highly advanced AI research assistant. Your goal is to provide deep, analytical, and well-researched answers to users' questions.
 
